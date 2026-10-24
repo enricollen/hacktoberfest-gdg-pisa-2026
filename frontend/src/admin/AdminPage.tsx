@@ -16,6 +16,8 @@ interface Vertical {
   item: string
   items: string
   box: string
+  /** Example shop for this kind of business: fills the identity fields. */
+  shop: { name: string; of: string; subtitle: string; site: string; colors: string[] }
   attributes: string[]
   questions: string[]
   products: { name: string; description: string; tags: string[]; allergens: string; image?: string }[]
@@ -30,6 +32,13 @@ const VERTICALS: Vertical[] = [
     item: 'pralina',
     items: 'praline',
     box: 'Scatola degustazione 16 praline',
+    shop: {
+      name: 'GemmaCacao',
+      of: 'di GemmaCacao',
+      subtitle: 'Cioccolateria artigianale',
+      site: 'gemmacacao.it/degustazione',
+      colors: ['#f7f0e3', '#6d3b1e', '#4a2c1d', '#c58a4d'],
+    },
     attributes: ['Tipo di cioccolato', 'Ripieno', 'Frutta secca', 'Note di degustazione'],
     questions: ['Fondente, al latte o bianco?', 'Ti piace la frutta secca?', 'Hai allergie o intolleranze?'],
     products: [
@@ -47,6 +56,13 @@ const VERTICALS: Vertical[] = [
     item: 'vino',
     items: 'vini',
     box: 'Kit degustazione 6 calici',
+    shop: {
+      name: 'Enoteca del Borgo',
+      of: "dell'Enoteca del Borgo",
+      subtitle: 'Vini e calici dal 1987',
+      site: 'enotecadelborgo.it/degustazione',
+      colors: ['#f6efe9', '#7b1e3a', '#4a1024', '#c9a46b'],
+    },
     attributes: ['Vitigno', 'Annata', 'Regione', 'Gradazione', 'Abbinamenti'],
     questions: ['Rossi, bianchi o bollicine?', 'Preferisci vini strutturati o freschi?', 'Che cosa mangerai?'],
     products: [
@@ -64,6 +80,13 @@ const VERTICALS: Vertical[] = [
     item: 'formaggio',
     items: 'formaggi',
     box: 'Tagliere degustazione 8 formaggi',
+    shop: {
+      name: 'Caseificio Val di Fiore',
+      of: 'del Caseificio Val di Fiore',
+      subtitle: 'Formaggi a latte crudo',
+      site: 'valdifiore.it/degustazione',
+      colors: ['#f8f3e3', '#c99a2e', '#5b4a1f', '#8a9a5b'],
+    },
     attributes: ['Latte', 'Stagionatura', 'Pasta', 'Abbinamenti'],
     questions: ['Formaggi freschi o stagionati?', 'Vaccino, ovino o caprino?', 'Ami gli erborinati?'],
     products: [
@@ -81,6 +104,13 @@ const VERTICALS: Vertical[] = [
     item: 'caffè',
     items: 'caffè',
     box: 'Box assaggio 5 monorigine',
+    shop: {
+      name: 'Torrefazione Aroma Nero',
+      of: 'della Torrefazione Aroma Nero',
+      subtitle: 'Caffè tostato a legna',
+      site: 'aromanero.it/degustazione',
+      colors: ['#f3ede6', '#3b2a20', '#8b5a2b', '#c7a17a'],
+    },
     attributes: ['Origine', 'Tostatura', 'Processo', 'Note aromatiche'],
     questions: ['Espresso o filtro?', 'Lo preferisci intenso o fruttato?', 'Lo bevi con il latte?'],
     products: [
@@ -98,6 +128,13 @@ const VERTICALS: Vertical[] = [
     item: 'birra',
     items: 'birre',
     box: 'Cassetta degustazione 6 birre',
+    shop: {
+      name: 'Birrificio Luppolo Ribelle',
+      of: 'del Birrificio Luppolo Ribelle',
+      subtitle: 'Birre artigianali non filtrate',
+      site: 'luppoloribelle.it/degustazione',
+      colors: ['#f7f1e1', '#c47f17', '#3d2b1f', '#6b8e23'],
+    },
     attributes: ['Stile', 'Gradazione', 'IBU', 'Luppoli', 'Abbinamenti'],
     questions: ['Chiare, ambrate o scure?', 'Ti piace l\'amaro del luppolo?', 'Preferisci birre leggere o corpose?'],
     products: [
@@ -197,15 +234,15 @@ export function AdminPage() {
           </h2>
           <label className="field">
             <span>Nome del negozio</span>
-            <input defaultValue="GemmaCacao" />
+            <input key={v.id} defaultValue={v.shop.name} />
           </label>
           <label className="field">
             <span>Sottotitolo</span>
-            <input key={v.id} defaultValue={`${v.label} artigianale`} />
+            <input key={v.id} defaultValue={v.shop.subtitle} />
           </label>
           <label className="field">
             <span>Indirizzo web (dal QR code)</span>
-            <input defaultValue={`gemmacacao.app/s/${slug}`} />
+            <input key={v.id} defaultValue={v.shop.site} />
           </label>
           <div className="field">
             <span>Logo</span>
@@ -214,7 +251,7 @@ export function AdminPage() {
           <div className="field">
             <span>Colori</span>
             <div className="swatches">
-              {['#f7f0e3', '#6d3b1e', '#4a2c1d', '#c58a4d'].map((c) => (
+              {v.shop.colors.map((c) => (
                 <span key={c} className="swatch" style={{ background: c }} title={c} />
               ))}
             </div>
@@ -228,7 +265,7 @@ export function AdminPage() {
           </h2>
           <label className="field">
             <span>Nome della guida</span>
-            <input key={v.id} defaultValue={`${withArticle(v.guide)} di GemmaCacao`} />
+            <input key={v.id} defaultValue={`${withArticle(v.guide)} ${v.shop.of}`} />
           </label>
           <label className="field">
             <span>Tono</span>
