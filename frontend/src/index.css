@@ -1043,10 +1043,12 @@ button {
 
 /* --- shop owner console (static demo) --------------------------------------------------------- */
 
+/* Pinned to the window's top-right corner, not to the centered 600 px column. */
 .admin-link {
-  position: absolute;
+  position: fixed;
+  z-index: 10;
   top: max(12px, env(safe-area-inset-top));
-  right: 16px;
+  right: max(16px, env(safe-area-inset-right));
   display: inline-flex;
   align-items: center;
   gap: 6px;
