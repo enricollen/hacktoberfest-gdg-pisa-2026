@@ -82,7 +82,7 @@ stateDiagram-v2
 ```
 
 - **Turni**: ogni risposta dell'utente è un `interrupt` di LangGraph. Il backend riprende il grafo con il testo trascritto. Lo stato è salvato su SQLite: anche ricaricando la pagina la conversazione riprende.
-- **Robustezza**: le chiamate a Gemma sono ridondate (se una è lenta ne parte una seconda in parallelo, se fallisce viene sostituita) entro 20 s; oltre, un piano B a regole capisce nome, gusti, allergie e voto e la conversazione va avanti. Il nome si chiede al massimo 3 volte (poi "Ospite N"), i gusti e i commenti poco chiari una volta sola: il flusso non si blocca mai.
+- **Robustezza**: le chiamate a Gemma sono ridondate (se una è lenta ne parte una seconda in parallelo, se fallisce viene sostituita) entro 20 s; se una API key supera i limiti (429) si passa alla chiave di riserva `GOOGLE_API_KEY_FALLBACK`; oltre, un piano B a regole capisce nome, gusti, allergie e voto e la conversazione va avanti. Il nome si chiede al massimo 3 volte (poi "Ospite N"), i gusti e i commenti poco chiari una volta sola: il flusso non si blocca mai.
 - **Sicurezza dei consigli**: se Gemma propone un dolcetto non disponibile, o che contiene un allergene dichiarato, il codice lo sostituisce con una scelta calcolata sui gusti della persona.
 - **Gemma 4**: si usa `gemma-4-26b-a4b-it`, un modello MoE con circa 4 miliardi di parametri attivi. Con `thinking_level="minimal"` arriva al primo token in circa 1 secondo e chiude la risposta in circa 2. L'output è JSON validato con Pydantic, tramite `response_json_schema`.
 
@@ -169,7 +169,7 @@ img/                   foto e descrizioni della scatola demo
 ```bash
 # 1. Chiavi (file esclusi da git)
 npx -y @elevenlabs/cli@latest onboard init   # salva ELEVENLABS_API_KEY in .env.local
-cp backend/.env.example backend/.env         # inserisci GOOGLE_API_KEY
+cp backend/.env.example backend/.env         # GOOGLE_API_KEY (+ opzionale GOOGLE_API_KEY_FALLBACK)
 
 # 2. Installazione e catalogo demo
 make setup

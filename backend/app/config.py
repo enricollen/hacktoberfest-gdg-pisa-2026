@@ -1,3 +1,4 @@
+import os
 from functools import lru_cache
 from pathlib import Path
 
@@ -56,6 +57,12 @@ class Settings(BaseSettings):
     @property
     def uploads_dir(self) -> Path:
         return self.data_dir / "uploads"
+
+
+def google_api_keys() -> list[str]:
+    """Primary key first, then the fallbacks used when a key runs out of quota."""
+    names = ("GOOGLE_API_KEY", "GOOGLE_API_KEY_FALLBACK")
+    return [k for k in (os.environ.get(n, "").strip() for n in names) if k]
 
 
 @lru_cache

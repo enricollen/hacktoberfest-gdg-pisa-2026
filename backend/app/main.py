@@ -10,7 +10,7 @@ from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from app.agent.graph import Deps, build_graph
 from app.agent.llm import LLM
 from app.api import router
-from app.config import get_settings
+from app.config import get_settings, google_api_keys
 from app.db import Database
 from app.logging_setup import setup_logging
 from app.vision.detector import SweetDetector
@@ -35,7 +35,10 @@ async def lifespan(app: FastAPI):
     embedder = ClipEmbedder(
         settings.clip_image_model, settings.clip_text_model, settings.models_dir / "fastembed"
     )
+    api_keys = google_api_keys()
+    log.info("Gemini API keys configured: %d", len(api_keys))
     llm = LLM(
+        api_keys,
         settings.llm_model,
         settings.llm_thinking_level,
         settings.llm_temperature,
