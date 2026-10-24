@@ -91,6 +91,14 @@ export default function App() {
 
   return (
     <div className="app">
+      {step === 'photo' && (
+        <a className="admin-link" href={`/s/${shop?.slug ?? 'demo'}/admin`}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
+            <path d="M4 10h16v10H4V10Zm2-6h12l2 4H4l2-4Zm4 9v5h4v-5h-4Z" />
+          </svg>
+          Area negozio
+        </a>
+      )}
       <header className={`header${step === 'photo' || step === 'analyzing' ? ' header--home' : ''}`}>
         {shop?.logo_url ? (
           <img className="header__logo" src={shop.logo_url} alt={shop.name} />
