@@ -49,7 +49,7 @@ export function Orb({ state, levelRef, size = 260 }: Props) {
 
       // Halo
       const halo = ctx.createRadialGradient(c, c, radius * 0.6, c, c, radius * 1.65)
-      const haloColor = s === 'listening' ? '232, 196, 140' : '200, 162, 122'
+      const haloColor = s === 'listening' ? '224, 176, 122' : '197, 138, 77'
       halo.addColorStop(0, `rgba(${haloColor}, ${0.28 + level * 0.35})`)
       halo.addColorStop(1, `rgba(${haloColor}, 0)`)
       ctx.fillStyle = halo
@@ -77,16 +77,16 @@ export function Orb({ state, levelRef, size = 260 }: Props) {
       const body = ctx.createRadialGradient(
         c - radius * 0.35, c - radius * 0.4, radius * 0.1, c, c, radius * 1.1,
       )
-      body.addColorStop(0, '#9a6a45')
-      body.addColorStop(0.45, '#5b3520')
-      body.addColorStop(1, '#2a160c')
+      body.addColorStop(0, '#c58a4d')
+      body.addColorStop(0.45, '#6d3b1e')
+      body.addColorStop(1, '#2a170f')
       ctx.fillStyle = body
       ctx.fill()
 
       // Swirl of gold while thinking, rim light otherwise
       ctx.save()
       ctx.clip()
-      ctx.strokeStyle = `rgba(232, 196, 140, ${s === 'thinking' ? 0.55 : 0.18 + level * 0.4})`
+      ctx.strokeStyle = `rgba(197, 138, 77, ${s === 'thinking' ? 0.55 : 0.18 + level * 0.4})`
       ctx.lineWidth = size * 0.012
       for (let k = 0; k < 3; k++) {
         ctx.beginPath()
@@ -108,8 +108,8 @@ export function Orb({ state, levelRef, size = 260 }: Props) {
       const gloss = ctx.createRadialGradient(
         c - radius * 0.38, c - radius * 0.45, 0, c - radius * 0.38, c - radius * 0.45, radius * 0.5,
       )
-      gloss.addColorStop(0, 'rgba(255, 240, 220, 0.35)')
-      gloss.addColorStop(1, 'rgba(255, 240, 220, 0)')
+      gloss.addColorStop(0, 'rgba(255, 246, 232, 0.35)')
+      gloss.addColorStop(1, 'rgba(255, 246, 232, 0)')
       ctx.fillStyle = gloss
       ctx.beginPath()
       ctx.arc(c, c, radius, 0, Math.PI * 2)
