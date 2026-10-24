@@ -1,0 +1,61 @@
+[project]
+name = "choco-tasting-backend"
+version = "0.1.0"
+description = "REST backend for the voice-guided chocolate box tasting experience"
+requires-python = ">=3.13,<3.14"
+# Runtime is deliberately light: no torch. YOLO and CLIP run on ONNX Runtime (CPU).
+dependencies = [
+    "fastapi[standard]>=0.115",
+    "pydantic-settings>=2.6",
+    "python-dotenv>=1.0",
+    "aiosqlite>=0.20",
+    "sqlite-vec>=0.1.6",
+    "langgraph>=0.4",
+    "langgraph-checkpoint-sqlite>=2.0",
+    "google-genai>=1.20",
+    "elevenlabs>=2.0",
+    "onnxruntime>=1.20",
+    "fastembed>=0.5",
+    "numpy>=2.1",
+    "pillow>=11.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.25",
+    "ruff>=0.8",
+]
+# One-off tooling to (re)export the detector to ONNX:
+#   uv run --group export python scripts/export_detector.py
+export = [
+    "ultralytics>=8.4",
+    "torch>=2.6",
+    "torchvision>=0.21",
+    "onnx>=1.17",
+    "onnxslim>=0.1.40",
+    "clip @ git+https://github.com/ultralytics/CLIP.git",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

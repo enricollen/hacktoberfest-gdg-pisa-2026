@@ -1,0 +1,19 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "isolated": true,
+    "launchOptions": {
+      "channel": "chromium",
+      "headless": true,
+      "args": [
+        "--use-fake-ui-for-media-stream",
+        "--use-fake-device-for-media-stream"
+      ]
+    },
+    "contextOptions": {
+      "permissions": ["camera", "microphone"],
+      "ignoreHTTPSErrors": true
+    }
+  },
+  "outputDir": ".playwright-mcp"
+}
