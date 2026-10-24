@@ -17,7 +17,7 @@ Si parla come con una persona: niente moduli da compilare. Se c'è rumore si pu�
 
 Per il negozio è anche un modo per sapere cosa piace davvero ai clienti: ogni commento viene registrato.
 
-**Non solo cioccolato.** Dalla home, il pulsante **Area negozio** (in alto a sinistra) apre un'anteprima di come il proprietario configurerebbe GemmaCacao: tipo di attività (cioccolateria, enoteca, caseificio, torrefazione, birrificio…), identità del negozio, guida vocale, catalogo, QR code e statistiche. È una pagina dimostrativa: i campi si compilano ma non sono collegati.
+**Non solo cioccolato.** Dalla home, il pulsante **Area negozio** (in alto a destra) apre un login simulato con le credenziali già compilate. Da lì il proprietario trova la **Configurazione** (tipo di attività: cioccolateria, enoteca, caseificio, torrefazione, birrificio…; identità del negozio, guida vocale, catalogo, QR code) e le **Analytics** (andamento delle degustazioni, classifica delle praline più apprezzate, gusti più richiesti, feedback dei clienti). Sono pagine dimostrative: campi e dati non sono collegati.
 
 ---
 

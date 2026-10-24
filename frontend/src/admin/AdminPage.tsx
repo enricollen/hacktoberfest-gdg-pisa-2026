@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from 'react'
+import { AdminShell } from './AdminShell'
+import { shopSlug } from './shop'
 
 /**
  * Shop owner console: a STATIC mock-up for the demo. Fields can be typed into but nothing is
- * saved. It shows that the same recognize → profile → recommend loop fits any food & drink
+ * saved (customer insights live in AnalyticsPage). It shows that the same recognize → profile → recommend loop fits any food & drink
  * business (wine bars, cheese shops, roasters...) by swapping vocabulary and catalog.
  */
 
@@ -107,19 +109,6 @@ const VERTICALS: Vertical[] = [
   },
 ]
 
-const STATS = [
-  { label: 'Degustazioni questo mese', value: '128' },
-  { label: 'Valutazione media', value: '4,4 / 5' },
-  { label: 'Profili di gusto raccolti', value: '342' },
-  { label: 'Clienti tornati ad acquistare', value: '37%' },
-]
-
-const COMMENTS = [
-  { who: 'Giulia', text: 'Mi ha consigliato esattamente quello che avrei scelto io!', rating: 5 },
-  { who: 'Marco', text: 'Esperienza divertente, la rifaremo con gli amici.', rating: 5 },
-  { who: 'Sara', text: 'Un po\' troppo dolce per me, ma il consiglio successivo era perfetto.', rating: 4 },
-]
-
 /** Decorative QR-like pattern (not a real QR code). */
 function FakeQr({ seed }: { seed: string }) {
   const cells: boolean[] = []
@@ -157,10 +146,6 @@ function FakeQr({ seed }: { seed: string }) {
 
 const withArticle = (noun: string) => (/^[aeiouàèéìòù]/i.test(noun) ? `L'${noun}` : `Il ${noun}`)
 
-function shopSlug(): string {
-  return window.location.pathname.match(/^\/s\/([\w-]+)/)?.[1] ?? 'demo'
-}
-
 export function AdminPage() {
   const [verticalId, setVerticalId] = useState('cioccolateria')
   const [notice, setNotice] = useState<string | null>(null)
@@ -174,20 +159,7 @@ export function AdminPage() {
   }
 
   return (
-    <div className="admin">
-      <header className="admin__top">
-        <a className="admin__back" href={`/s/${slug}`}>
-          ← Esperienza cliente
-        </a>
-        <img className="admin__logo" src={`/media/${slug}/logo.svg`} alt="Logo del negozio" />
-        <span className="admin__badge">Area negozio</span>
-      </header>
-
-      <div className="admin__banner" role="note">
-        <strong>Anteprima dimostrativa.</strong> Così un negozio configurerebbe GemmaCacao: i campi
-        si possono compilare, ma non sono collegati.
-      </div>
-
+    <AdminShell tab="admin">
       <form className="admin__grid" onSubmit={demoOnly}>
         {/* 1. Business type */}
         <section className="panel panel--wide" aria-labelledby="vertical-title">
@@ -341,7 +313,7 @@ export function AdminPage() {
         </section>
 
         {/* 5. Boxes & QR */}
-        <section className="panel" aria-labelledby="box-title">
+        <section className="panel panel--wide" aria-labelledby="box-title">
           <h2 id="box-title" className="panel__title">
             5 · Box e QR code
           </h2>
@@ -363,31 +335,6 @@ export function AdminPage() {
           </button>
         </section>
 
-        {/* 6. Insights */}
-        <section className="panel" aria-labelledby="insights-title">
-          <h2 id="insights-title" className="panel__title">
-            6 · Cosa dicono i clienti
-          </h2>
-          <p className="panel__hint">Dati di esempio.</p>
-          <div className="stats">
-            {STATS.map((s) => (
-              <div key={s.label} className="stat">
-                <span className="stat__value">{s.value}</span>
-                <span className="stat__label">{s.label}</span>
-              </div>
-            ))}
-          </div>
-          <ul className="comments">
-            {COMMENTS.map((c) => (
-              <li key={c.who} className="comment">
-                <span className="stars">{'★'.repeat(c.rating)}</span>
-                <p>«{c.text}»</p>
-                <span className="comment__who">{c.who}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
         <div className="admin__actions">
           <button type="submit" className="btn btn--primary">
             Salva configurazione
@@ -400,6 +347,6 @@ export function AdminPage() {
           {notice}
         </div>
       )}
-    </div>
+    </AdminShell>
   )
 }

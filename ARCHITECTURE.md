@@ -185,6 +185,7 @@ frontend/
     hooks/useTastingVoice.ts   ciclo voce: parla, ascolta, invia
     components/        Orb, PhotoStep, BoxView, PeopleStep, Tasting, ProfileToast, Summary
     log.ts             invio degli eventi del browser al log del server
-    admin/AdminPage.tsx  area negozio (/s/<negozio>/admin): anteprima statica, non collegata
+    admin/             area negozio, anteprime statiche non collegate:
+                       LoginPage (/s/<negozio>/login), AdminPage (/admin), AnalyticsPage (/analytics)
 img/                   foto e descrizioni della scatola demo
 ```

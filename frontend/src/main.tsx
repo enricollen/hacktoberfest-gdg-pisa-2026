@@ -3,10 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AdminPage } from './admin/AdminPage.tsx'
+import { AnalyticsPage } from './admin/AnalyticsPage.tsx'
+import { LoginPage } from './admin/LoginPage.tsx'
 
-// /s/<shop>/admin: shop owner console (static demo mock-up); anything else: customer experience.
-const isAdmin = /^\/s\/[\w-]+\/admin\/?$/.test(window.location.pathname)
+// /s/<shop>/{login,admin,analytics}: shop owner pages (static demo mock-ups);
+// anything else: the customer experience.
+const ownerPage = window.location.pathname.match(/^\/s\/[\w-]+\/(login|admin|analytics)\/?$/)?.[1]
+const pages = { login: LoginPage, admin: AdminPage, analytics: AnalyticsPage }
+const Page = ownerPage ? pages[ownerPage as keyof typeof pages] : App
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>{isAdmin ? <AdminPage /> : <App />}</StrictMode>,
+  <StrictMode>
+    <Page />
+  </StrictMode>,
 )

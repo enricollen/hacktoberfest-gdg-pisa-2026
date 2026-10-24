@@ -92,7 +92,7 @@ export default function App() {
   return (
     <div className="app">
       {step === 'photo' && (
-        <a className="admin-link" href={`/s/${shop?.slug ?? 'demo'}/admin`}>
+        <a className="admin-link" href={`/s/${shop?.slug ?? 'demo'}/login`}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
             <path d="M4 10h16v10H4V10Zm2-6h12l2 4H4l2-4Zm4 9v5h4v-5h-4Z" />
           </svg>
