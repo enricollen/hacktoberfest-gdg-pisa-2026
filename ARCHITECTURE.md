@@ -188,4 +188,5 @@ frontend/
     admin/             area negozio, anteprime statiche non collegate:
                        LoginPage (/s/<negozio>/login), AdminPage (/admin), AnalyticsPage (/analytics)
 img/                   foto e descrizioni della scatola demo
+presentation/          slide di presentazione della demo (index.html autonomo)
 ```

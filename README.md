@@ -55,3 +55,22 @@ Poi:
 Altri comandi: `make test` (test), `make lint` (controlli), `make seed` (ricarica il catalogo).
 
 > Nomi, note di degustazione e allergeni del catalogo demo sono dati di esempio ricavati da `img/descrizioni_dolci.txt`: vanno verificati con la cioccolateria.
+
+---
+
+## Presentazione
+
+In `presentation/index.html` ci sono le 5 slide che introducono la demo: copertina, problema, soluzione, architettura e passaggio alla demo live. È un unico file HTML, senza build né dipendenze.
+
+```bash
+open presentation/index.html        # macOS (su Linux: xdg-open)
+```
+
+| Tasto | Azione |
+|---|---|
+| `→` `↓` `Spazio` / clic a destra | slide successiva |
+| `←` `↑` / clic a sinistra | slide precedente |
+| `F` | schermo intero |
+| `N` | mostra/nasconde le note per lo speaker |
+
+L'indirizzo ricorda la slide aperta (`index.html#4` apre l'architettura). I font arrivano da Google Fonts: senza connessione le slide funzionano comunque, con Georgia e Arial al loro posto.

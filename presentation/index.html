@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GemmaCacao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" />
+<style>
+  html, body { margin: 0; height: 100%; background: #140b07; overflow: hidden; }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; }
+  #stage > section { position: absolute; inset: 0; box-sizing: border-box; overflow: hidden; }
+  #stage > section:not(.active) { display: none !important; }
+  section * { margin: 0; box-sizing: border-box; }
+  section h1 { line-height: 1.1; } section h2 { line-height: 1.15; } section h3 { line-height: 1.2; } section p { line-height: 1.4; }
+  section aside { display: none; }
+  #notes { position: fixed; left: 0; right: 0; bottom: 0; max-height: 40vh; overflow: auto; padding: 16px 24px; background: rgba(20, 11, 7, 0.92); color: #f7f0e3; font: 18px/1.5 Inter, system-ui, sans-serif; display: none; }
+  body.show-notes #notes { display: block; }
+  #counter { position: fixed; right: 16px; bottom: 12px; color: #7a5a48; font: 14px Inter, system-ui, sans-serif; }
+  body.show-notes #counter { display: none; }
+</style>
+</head>
+<body>
+<!-- Copia autonoma del deck GemmaCacao. Frecce/spazio: naviga · F: schermo intero · N: note per lo speaker -->
+<div id="stage">
+<section id="cover" data-transition="fade" style="background:radial-gradient(circle at 78% 30%, #4a2c1d 0%, #2a170f 60%);color:#fffaf1;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<div style="position:absolute;left:1232px;top:250px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #f3c993 0%, #c58a4d 32%, #6d3b1e 70%, #2a170f 100%);box-shadow:0 40px 120px rgba(0, 0, 0, 0.45)"></div>
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#e0b07a">GDG Pisa · Hacktoberfest 2026</p>
+<h1 style="font-family:'Cormorant Garamond', Georgia, serif;font-size:180px;font-weight:600;line-height:1;color:#fffaf1">GemmaCacao</h1>
+<p style="width:980px;font-family:'Cormorant Garamond', Georgia, serif;font-size:56px;font-style:italic;line-height:1.2;color:#e6d8c2">Il maître chocolatier che ti guida, a voce, nella degustazione</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#c9a27a">[Nome presentatore]</p>
+<aside>Ciao a tutti! Vi presento GemmaCacao: un maître chocolatier virtuale che vi accompagna, a voce, nella degustazione di una scatola di cioccolatini. Il nome viene da Gemma 4, il modello di Google che gli dà la parola.</aside>
+</section>
+<section id="problema" data-transition="fade" style="background:#f7f0e3;color:#2a170f;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#6d3b1e">Il problema</p>
+<h2 style="width:1500px;font-family:'Cormorant Garamond', Georgia, serif;font-size:80px;font-weight:600;line-height:1.1;color:#2a170f">Una scatola di cioccolatini, e nessuno che te la racconti</h2>
+</div>
+<div style="display:flex;gap:32px;flex:1">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#fbf5ea;border:1px solid #e6d8c2;border-radius:24px;padding:48px">
+<h3 style="font-size:32px;font-weight:600;color:#6d3b1e">In cioccolateria</h3>
+<p style="font-size:32px;line-height:1.4;color:#4a2c1d">Il cioccolatiere racconta ogni pezzo, chiede i tuoi gusti e ti consiglia cosa assaggiare.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#2a170f;border-radius:24px;padding:48px">
+<h3 style="font-size:32px;font-weight:600;color:#e0b07a">A casa</h3>
+<p style="font-size:32px;line-height:1.4;color:#f7f0e3">La scatola arriva online o in regalo da un amico che l’ha composta in negozio. Assaggi a caso: l’esperienza diventa sterile.</p>
+</div>
+</div>
+<p style="font-family:'Cormorant Garamond', Georgia, serif;font-size:48px;font-style:italic;color:#6d3b1e">Il cioccolatiere non può essere lì con te.</p>
+<aside>Pensate a quando ricevete una scatola di cioccolatini: comprata online, oppure regalata da un amico che l’ha composta in negozio scegliendo i singoli pezzi. In negozio c’è il cioccolatiere che vi racconta cosa state mangiando e vi consiglia; a casa siete da soli, assaggiate a caso e l’esperienza perde molto. Il cioccolatiere non può venire a casa vostra.</aside>
+</section>
+<section id="soluzione" data-transition="fade" style="background:#fbf5ea;color:#2a170f;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#6d3b1e">La soluzione</p>
+<h2 style="font-family:'Cormorant Garamond', Georgia, serif;font-size:80px;font-weight:600;line-height:1.1;color:#2a170f">Il maître chocolatier, dentro la scatola</h2>
+<p style="font-size:32px;color:#7a5a48">Un QR code nella scatola apre una web app sul telefono.</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px;flex:1">
+<div style="display:flex;flex-direction:column;gap:16px;background:#f7f0e3;border:1px solid #e6d8c2;border-radius:24px;padding:36px">
+<p style="font-family:'Cormorant Garamond', Georgia, serif;font-size:72px;font-weight:600;line-height:1;color:#c58a4d">1</p>
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Foto alla scatola</h3>
+<p style="font-size:24px;line-height:1.45;color:#4a2c1d">Conta e riconosce ogni cioccolatino dal catalogo del negozio.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#f7f0e3;border:1px solid #e6d8c2;border-radius:24px;padding:36px">
+<p style="font-family:'Cormorant Garamond', Georgia, serif;font-size:72px;font-weight:600;line-height:1;color:#c58a4d">2</p>
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Quanti siete</h3>
+<p style="font-size:24px;line-height:1.45;color:#4a2c1d">Il maître conosce ognuno: nome e gusti preferiti.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#f7f0e3;border:1px solid #e6d8c2;border-radius:24px;padding:36px">
+<p style="font-family:'Cormorant Garamond', Georgia, serif;font-size:72px;font-weight:600;line-height:1;color:#c58a4d">3</p>
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Degustazione a voce</h3>
+<p style="font-size:24px;line-height:1.45;color:#4a2c1d">Consiglia il pezzo giusto, chiede com’era e impara dai commenti.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#2a170f;border-radius:24px;padding:36px">
+<p style="font-family:'Cormorant Garamond', Georgia, serif;font-size:72px;font-weight:600;line-height:1;color:#e0b07a">4</p>
+<h3 style="font-size:32px;font-weight:600;color:#fffaf1">Riepilogo</h3>
+<p style="font-size:24px;line-height:1.45;color:#e6d8c2">Per ognuno: assaggi, voti, preferito e profilo di gusto.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#4a2c1d">Si parla come con una persona, niente moduli. <span style="color:#6d3b1e"><b>E il negozio scopre cosa piace davvero ai clienti.</b></span></p>
+<aside>La soluzione è GemmaCacao. Nella scatola c’è un QR code che apre una web app. Si fa una foto alla scatola aperta e l’app conta e riconosce i cioccolatini. Si dice quanti si è, e il maître conosce ognuno per nome e gusti. Poi la degustazione è tutta a voce: consiglia a ciascuno il pezzo più adatto, chiede com’era, impara dai commenti e propone il successivo. Alla fine c’è un riepilogo a schede. E per il negozio ogni commento è un dato prezioso.</aside>
+</section>
+<section id="architettura" data-transition="fade" style="background:#f7f0e3;color:#2a170f;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#6d3b1e">Architettura</p>
+<h2 style="font-family:'Cormorant Garamond', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1;color:#2a170f">Come è fatta</h2>
+<div style="position:absolute;left:128px;top:440px;width:300px;height:300px;display:flex;flex-direction:column;gap:12px;background:#fbf5ea;border:2px solid #4a2c1d;border-radius:24px;padding:32px">
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Telefono</h3>
+<p style="font-size:24px;color:#6d3b1e"><b>PWA React + Vite</b></p>
+<p style="font-size:24px;line-height:1.4;color:#7a5a48">foto · microfono · audio</p>
+</div>
+<div style="position:absolute;left:620px;top:340px;width:640px;height:540px;display:flex;flex-direction:column;gap:16px;background:#efe3cf;border:2px solid #4a2c1d;border-radius:24px;padding:28px">
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Backend FastAPI · Python</h3>
+<div style="display:flex;flex-direction:column;gap:8px;background:#fbf5ea;border:1px solid #e6d8c2;border-radius:16px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#2a170f">Visione</p>
+<p style="font-size:24px;color:#7a5a48">YOLOE conta · CLIP riconosce</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#fbf5ea;border:2px solid #c58a4d;border-radius:16px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#2a170f">Agente · LangGraph</p>
+<p style="font-size:24px;color:#7a5a48">Il codice guida, Gemma parla</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;background:#fbf5ea;border:1px solid #e6d8c2;border-radius:16px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#2a170f">Dati</p>
+<p style="font-size:24px;color:#7a5a48">SQLite + sqlite-vec</p>
+</div>
+</div>
+<div style="position:absolute;left:1400px;top:228px;width:392px;height:176px;display:flex;flex-direction:column;gap:6px;background:#fbf5ea;border:2px solid #4a2c1d;border-radius:24px;padding:24px 28px">
+<p style="font-size:24px;color:#7a5a48">ElevenLabs</p>
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Scribe v2</h3>
+<p style="font-size:24px;color:#6d3b1e">voce → testo</p>
+</div>
+<div style="position:absolute;left:1400px;top:520px;width:392px;height:200px;display:flex;flex-direction:column;gap:6px;background:#2a170f;border:2px solid #c58a4d;border-radius:24px;padding:24px 28px;box-shadow:0 20px 50px rgba(42, 23, 15, 0.3)">
+<p style="font-size:24px;color:#e0b07a">Gemini API</p>
+<h3 style="font-size:44px;font-weight:600;color:#fffaf1">Gemma 4</h3>
+<p style="font-size:24px;color:#e6d8c2">gemma-4-26b-a4b-it</p>
+</div>
+<div style="position:absolute;left:1400px;top:760px;width:392px;height:176px;display:flex;flex-direction:column;gap:6px;background:#fbf5ea;border:2px solid #4a2c1d;border-radius:24px;padding:24px 28px">
+<p style="font-size:24px;color:#7a5a48">ElevenLabs</p>
+<h3 style="font-size:32px;font-weight:600;color:#2a170f">Flash v2.5</h3>
+<p style="font-size:24px;color:#6d3b1e">testo → voce</p>
+</div>
+<p style="position:absolute;left:640px;top:252px;width:700px;font-size:24px;color:#6d3b1e">microfono via WebSocket, token monouso</p>
+<p style="position:absolute;left:436px;top:494px;width:180px;font-size:24px;text-align:center;color:#6d3b1e">foto · testo</p>
+<p style="position:absolute;left:436px;top:662px;width:180px;font-size:24px;text-align:center;color:#6d3b1e">audio MP3</p>
+<svg aria-label="Collegamenti tra telefono, backend e servizi" style="position:absolute;left:0;top:0;width:1920px;height:1080px" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+<marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6d3b1e"/></marker>
+<marker id="head-caramel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c58a4d"/></marker>
+</defs>
+<g fill="none" stroke="#6d3b1e" stroke-width="3">
+<path d="M278 440 V300 H1400" marker-start="url(#head)" marker-end="url(#head)"/>
+<path d="M428 540 H620" marker-end="url(#head)"/>
+<path d="M620 650 H428" marker-end="url(#head)"/>
+<path d="M1260 848 H1400" marker-end="url(#head)"/>
+<path d="M1260 620 H1400" stroke="#c58a4d" stroke-width="4" marker-start="url(#head-caramel)" marker-end="url(#head-caramel)"/>
+</g>
+</svg>
+<aside>Lato telefono c’è una PWA in React e Vite. Il backend è in FastAPI e ha tre parti. La visione: YOLOE conta i cioccolatini nella foto e CLIP li riconosce confrontandoli col catalogo, tutto su ONNX Runtime in CPU, 16 su 16 in circa un secondo. L’agente è una macchina a stati LangGraph: il codice decide il flusso, cioè a chi tocca e cosa resta nella scatola, mentre Gemma 4, via Gemini API, si occupa del linguaggio. I dati stanno in SQLite con sqlite-vec. La voce è di ElevenLabs: Scribe v2 trascrive in tempo reale, con il microfono collegato direttamente dal browser, e Flash v2.5 sintetizza la risposta, che arriva in streaming.</aside>
+</section>
+<section id="demo" data-transition="fade" style="background:radial-gradient(circle at 22% 50%, #4a2c1d 0%, #2a170f 65%);color:#fffaf1;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;align-items:end;gap:32px">
+<div style="position:absolute;left:168px;top:300px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #f3c993 0%, #c58a4d 32%, #6d3b1e 70%, #2a170f 100%);box-shadow:0 40px 120px rgba(0, 0, 0, 0.45)"></div>
+<p style="width:1000px;font-size:24px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#e0b07a">Demo live</p>
+<h1 style="width:1000px;font-family:'Cormorant Garamond', Georgia, serif;font-size:140px;font-weight:600;line-height:1;color:#fffaf1">Assaggiamo insieme</h1>
+<p style="width:1000px;font-family:'Cormorant Garamond', Georgia, serif;font-size:48px;font-style:italic;line-height:1.25;color:#e6d8c2">Una scatola, una foto, una degustazione guidata.</p>
+<aside>Basta slide: vediamolo dal vivo. Ho qui una scatola: facciamo la foto, diciamo quanti siamo e lasciamo parlare il maître.</aside>
+</section>
+</div>
+<div id="notes"></div>
+<div id="counter"></div>
+<script>
+  const slides = [...document.querySelectorAll('#stage > section')]
+  const stage = document.getElementById('stage')
+  const notes = document.getElementById('notes')
+  const counter = document.getElementById('counter')
+  let current = Math.min(Math.max(parseInt(location.hash.slice(1), 10) - 1 || 0, 0), slides.length - 1)
+
+  function fit() {
+    const scale = Math.min(innerWidth / 1920, innerHeight / 1080)
+    stage.style.transform = `scale(${scale}) translate(-50%, -50%)`
+  }
+
+  function show(i) {
+    current = Math.min(Math.max(i, 0), slides.length - 1)
+    slides.forEach((s, j) => s.classList.toggle('active', j === current))
+    notes.textContent = slides[current].querySelector('aside')?.textContent ?? ''
+    counter.textContent = `${current + 1} / ${slides.length}`
+    history.replaceState(null, '', `#${current + 1}`)
+  }
+
+  addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) show(current + 1)
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) show(current - 1)
+    else if (e.key === 'Home') show(0)
+    else if (e.key === 'End') show(slides.length - 1)
+    else if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()
+    else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-notes')
+    else return
+    e.preventDefault()
+  })
+  addEventListener('click', (e) => show(current + (e.clientX > innerWidth / 2 ? 1 : -1)))
+  addEventListener('resize', fit)
+  fit()
+  show(current)
+</script>
+</body>
+</html>
