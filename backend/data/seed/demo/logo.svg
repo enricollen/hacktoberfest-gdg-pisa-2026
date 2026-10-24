@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" role="img" aria-label="GemmaCacao">
-  <g fill="none" stroke="#C8A27A" stroke-width="2.5">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370 96" role="img" aria-label="GemmaCacao">
+  <g fill="none" stroke="#6B3F24" stroke-width="2.5">
     <ellipse cx="48" cy="48" rx="22" ry="34" transform="rotate(-25 48 48)"/>
     <path d="M38 22 C 52 40, 52 58, 58 74" transform="rotate(-25 48 48)"/>
   </g>
-  <text x="88" y="50" font-family="Georgia, 'Times New Roman', serif" font-size="34" letter-spacing="0.5"><tspan fill="#E8C48C">Gemma</tspan><tspan fill="#F3E6D3">Cacao</tspan></text>
-  <text x="90" y="76" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#C8A27A" letter-spacing="4">CIOCCOLATERIA ARTIGIANALE</text>
+  <text x="88" y="50" font-family="Georgia, 'Times New Roman', serif" font-size="34" letter-spacing="0.5"><tspan fill="#8A5A33">Gemma</tspan><tspan fill="#3B2314">Cacao</tspan></text>
+  <text x="90" y="76" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#7A5A43" letter-spacing="4">CIOCCOLATERIA ARTIGIANALE</text>
 </svg>
