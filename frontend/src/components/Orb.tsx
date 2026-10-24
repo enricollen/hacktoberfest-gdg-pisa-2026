@@ -49,8 +49,9 @@ export function Orb({ state, levelRef, size = 260 }: Props) {
 
       // Halo
       const halo = ctx.createRadialGradient(c, c, radius * 0.6, c, c, radius * 1.65)
-      const haloColor = s === 'listening' ? '224, 176, 122' : '197, 138, 77'
-      halo.addColorStop(0, `rgba(${haloColor}, ${0.28 + level * 0.35})`)
+      // Dark chocolate glow: stands out on the light cream background.
+      const haloColor = s === 'listening' ? '109, 59, 30' : '74, 44, 29'
+      halo.addColorStop(0, `rgba(${haloColor}, ${0.5 + level * 0.4})`)
       halo.addColorStop(1, `rgba(${haloColor}, 0)`)
       ctx.fillStyle = halo
       ctx.beginPath()
