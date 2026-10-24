@@ -91,7 +91,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="header">
+      <header className={`header${step === 'photo' || step === 'analyzing' ? ' header--home' : ''}`}>
         {shop?.logo_url ? (
           <img className="header__logo" src={shop.logo_url} alt={shop.name} />
         ) : (

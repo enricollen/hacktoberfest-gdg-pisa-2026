@@ -80,9 +80,20 @@ button {
   padding: 8px 0 4px;
 }
 
+/* Sized by width so it scales down on narrow phones without distortion. */
 .header__logo {
-  height: 52px;
-  max-width: 80%;
+  width: min(78%, 300px);
+  height: auto;
+  transition: width 0.4s ease;
+}
+
+/* Home (photo step): the shop brand is the first thing the customer sees. */
+.header--home {
+  padding: 28px 0 8px;
+}
+
+.header--home .header__logo {
+  width: min(100%, 420px);
 }
 
 .header__name {
